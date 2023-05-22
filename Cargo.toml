@@ -1,0 +1,15 @@
+[package]
+name = "egui_clip_textedit"
+version = "0.1.0"
+edition = "2021"
+authors = ["Rui Kobayashi <roboroborx782@gmail.com>"]
+description = "Text editor for text data with a large number of lines."
+license = "MIT OR Apache-2.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+futures = "0.3"
+eframe = {version = "0.21.0", default-features = false, features = ["accesskit", "default_fonts", "wgpu"]}
+tracing-subscriber = "0.3"
+bytemuck = { version = "1.7.1", optional = true }
