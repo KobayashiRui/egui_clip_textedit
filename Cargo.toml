@@ -4,6 +4,7 @@ version = "0.1.1"
 edition = "2021"
 authors = ["Rui Kobayashi <roboroborx782@gmail.com>"]
 description = "Text editor for text data with a large number of lines."
+homepage = "https://github.com/KobayashiRui/egui_clip_textedit"
 repository = "https://github.com/KobayashiRui/egui_clip_textedit"
 license = "MIT"
 
