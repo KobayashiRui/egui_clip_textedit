@@ -34,6 +34,10 @@ impl ClipTextEdit {
             }
         }
     }
+
+    pub fn get_text(self)->String{
+        return self.text.join("\n")
+    }
 }
 
 impl ClipTextEdit {
