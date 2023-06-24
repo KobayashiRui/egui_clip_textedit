@@ -3,15 +3,8 @@ use eframe::egui;
 use epaint::text::cursor::Cursor;
 use epaint::{Color32, text::{LayoutJob, TextFormat}, FontFamily, FontId};
 
-use std::fs;
-use std::io::Read;
-use std::path::Path;
-use std::process::id;
-use std::sync::mpsc::{Sender, Receiver};
-use std::sync::mpsc;
-
 pub struct ClipTextEdit {
-    text: Vec<String>,
+    pub text: Vec<String>,
     row_index: Option<usize>,
     cursor: Option<Cursor>,
 }
@@ -22,6 +15,23 @@ impl ClipTextEdit {
             text: text.split('\n').map(|s| s.to_string()).collect(),
             row_index: None,
             cursor: None,
+        }
+    }
+}
+
+impl ClipTextEdit {
+    pub fn get_now_row(self)->Option<usize>{
+        return self.row_index;
+    }
+    pub fn get_now_cursor(self)->Option<Cursor>{
+        return self.cursor;
+    }
+    pub fn get_now_cursor_pos(self)->Option<usize>{
+        match self.cursor{
+            None=> {return None},
+            Some(c)=>{
+                return Some(c.ccursor.index)
+            }
         }
     }
 }
@@ -227,7 +237,6 @@ impl ClipTextEdit {
                         row_number_width = _row_num_galley.mesh_bounds.max.x - _row_num_galley.mesh_bounds.min.x;
                         //println!("galley: min:{:?}, max:{:?}", row_number_galley.mesh_bounds.min, row_number_galley.mesh_bounds.max);
                     } 
-
 
                     for row in row_range {
                         if row < self.text.len() {
