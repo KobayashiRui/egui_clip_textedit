@@ -247,6 +247,18 @@ impl ClipTextEdit {
                             ui.horizontal(|ui|{
 
                             let mut galley = layouter(ui, &self.text[row], available_width);
+
+                            let mut row_rect = ui.available_rect_before_wrap();
+                            row_rect.set_height(galley.size().y.max(row_height));
+
+                            //fill row
+                            ui.painter().rect_filled(
+                                row_rect,
+                                0.0,                              //  curve
+                                Color32::from_rgb(55,55, 55)     //  color
+                            );
+                            
+
                             if let (Some(ri) , Some(c)) =  (self.row_index, self.cursor) {
                                 if ri == row{
                                     self.cursor = Some(galley.from_ccursor(c.ccursor));
@@ -260,6 +272,17 @@ impl ClipTextEdit {
                                 let desired_height = row_height;
                                 let desired_size = vec2(desired_width, galley.size().y.max(desired_height));//.at_least(min_size - margin * 2.0);
                                 let (id, rect) = ui.allocate_space(desired_size);
+
+                                //paint row back ground
+                                let row_number_rect = Rect::from_min_max(row_rect.min, Pos2::new(row_rect.min.x+desired_width, row_rect.max.y));
+                                //fill
+                                ui.painter().rect_filled(
+                                    row_number_rect,
+                                    0.0,                              //  curve
+                                    Color32::from_rgb(0, 50,0)     //  color
+                                );
+
+
 
                                 let painter = ui.painter_at(rect);
                                 painter.galley(rect.min, row_num_galley.clone());

@@ -1,6 +1,6 @@
 [package]
 name = "egui_clip_textedit"
-version = "0.1.4"
+version = "0.1.5"
 edition = "2021"
 authors = ["Rui Kobayashi <roboroborx782@gmail.com>"]
 description = "Text editor for text data with a large number of lines."
