@@ -182,7 +182,7 @@ impl ClipTextEdit {
                 ui.painter().rect_filled(
                     outer_rect,
                     2.0,                              //  curve
-                    Color32::from_rgb(48, 0, 0)     //  color
+                    Color32::from_rgb(48, 48, 48)     //  color
                 );
 
                 //フォントの設定
@@ -205,8 +205,8 @@ impl ClipTextEdit {
                 };
                 let layouter = &mut default_layouter;
 
-                let output = egui::ScrollArea::vertical()
-                .max_width(f32::INFINITY)
+                let output = egui::ScrollArea::both()
+                //.max_width(f32::INFINITY)
                 //.stick_to_bottom(true)
                 .auto_shrink([false; 2])
                 .show_rows(ui, row_height, total_rows, |ui, row_range| {
@@ -238,7 +238,7 @@ impl ClipTextEdit {
                     
                     if row_number_enable {
                         let _row_num_galley = layouter(ui, &self.text.len().to_string(), available_width);
-                        row_number_width = _row_num_galley.mesh_bounds.max.x - _row_num_galley.mesh_bounds.min.x;
+                        row_number_width = _row_num_galley.mesh_bounds.max.x - _row_num_galley.mesh_bounds.min.x + 10.0;
                         //println!("galley: min:{:?}, max:{:?}", row_number_galley.mesh_bounds.min, row_number_galley.mesh_bounds.max);
                     } 
 
@@ -265,7 +265,8 @@ impl ClipTextEdit {
                                 painter.galley(rect.min, row_num_galley.clone());
                             }
 
-                            let desired_width = available_width;
+                            //let desired_width = available_width - row_number_width;
+                            let desired_width = galley.size().x;
                             let desired_height = row_height;
                             let desired_size = vec2(desired_width, galley.size().y.max(desired_height));//.at_least(min_size - margin * 2.0);
                             let (id, rect) = ui.allocate_space(desired_size);
